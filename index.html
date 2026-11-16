@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Closet Ana Lu: roupas e acessórios femininos com envio para todo o Brasil. Compre pelo site e finalize pelo WhatsApp.">
+<title>Closet Ana Lu | Roupas e acessórios femininos</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="aviso" data-k="aviso">Pague com Pix ou cartão e receba em todo o Brasil</div>
+<div class="topo">
+  <header>
+    <button class="buscar" id="btnBusca">Buscar</button>
+    <a class="logo" href="#" aria-label="Closet Ana Lu, início"><img src="assets/logo.svg" alt="Closet Ana Lu"></a>
+    <button class="sacola" id="btnSacola">Sacola (<span id="qtdSacola">0</span>)</button>
+  </header>
+  <nav class="cats" id="cats" aria-label="Categorias"></nav>
+</div>
+
+<section class="hero" id="hero"><div class="hin">
+  <h1 data-k="heroTit">Moda feminina com delicadeza</h1>
+  <p data-k="heroTag">Escolha suas peças e finalize pelo WhatsApp.</p>
+  <a class="btn" href="#produtos" data-k="heroBtn">Ver peças</a><br>
+  <a class="tl" id="linkFalar" target="_blank" rel="noopener" data-k="heroLink">Falar com a Ana Lu</a>
+</div></section>
+
+<section class="trust">
+  <div><b data-k="t1t">Pix e cartão</b><span data-k="t1d">pague como preferir</span></div>
+  <div><b data-k="t2t">Envio para todo o Brasil</b><span data-k="t2d">com código de rastreio</span></div>
+  <div><b data-k="t3t">Troca em 7 dias</b><span data-k="t3d">peças sem uso</span></div>
+  <div><b data-k="t4t">Atendimento pessoal</b><span data-k="t4d">fale com a Ana Lu no WhatsApp</span></div>
+</section>
+
+<section class="secao centro" id="colecoesSec" hidden>
+  <h2 data-k="catTitulo">Compre por categoria</h2>
+  <div class="tiles" id="tiles"></div>
+</section>
+
+<section class="secao" id="produtos">
+  <h2 class="centro" data-k="prodTitulo">Nossas peças</h2>
+  <div class="ferr">
+    <div class="colecoes" id="colecoesBtns"></div>
+    <input id="q" type="search" placeholder="Buscar peça" aria-label="Buscar peça">
+    <div class="fsel">
+      <select id="fTam" aria-label="Tamanho"></select>
+      <select id="fCor" aria-label="Cor"></select>
+      <select id="fPreco" aria-label="Preço"></select>
+      <select id="fOrd" aria-label="Ordenar"></select>
+    </div>
+    <div class="fcont"><span id="fCont"></span> <button class="link" id="fLimpar" hidden>Limpar filtros</button></div>
+  </div>
+</section>
+<div class="favbar" id="favBar" hidden><span id="favTxt"></span><div><button class="link" id="verFav">Ver minha lista</button> <a class="btn" id="favWa" target="_blank" rel="noopener">Enviar pelo WhatsApp</a></div></div>
+<main class="grid" id="grid" aria-live="polite"></main>
+
+<section class="secao centro" id="looksSec" hidden>
+  <h2 data-k="lookT">Monte o look</h2>
+  <p class="meta" data-k="lookD">Combinações que a Ana Lu separou para você.</p>
+  <div class="tiles" id="lookGrid" style="grid-template-columns:1fr"></div>
+</section>
+
+<section class="alt"><div class="estreito"><h2 data-k="sobreT">Sobre o Closet</h2><p data-k="sobreD">Sobre a loja.</p></div></section>
+
+<section class="alt passos" id="como-comprar"><div class="estreito" style="padding-top:0;text-align:left">
+  <h2 class="centro" data-k="comoT">Como comprar</h2>
+  <ol>
+    <li><b data-k="s1t">Escolha suas peças.</b> <span data-k="s1d">Selecione o tamanho e toque em adicionar à sacola.</span></li>
+    <li><b data-k="s2t">Finalize o pedido.</b> <span data-k="s2d">Informe nome e WhatsApp. O pedido chega direto para a Ana Lu.</span></li>
+    <li><b data-k="s3t">Pague e receba.</b> <span data-k="s3d">Combinamos frete e pagamento por Pix ou cartão, e você recebe o rastreio.</span></li>
+  </ol>
+</div></section>
+
+<section class="estreito"><h2 data-k="vipT">Lista VIP</h2><p data-k="vipD">Receba as novidades em primeira mão.</p><a class="btn" id="linkVip" target="_blank" rel="noopener" data-k="vipBtn">Quero entrar na lista</a></section>
+
+<section class="faq" id="duvidas">
+  <h2 data-k="duvT">Dúvidas frequentes</h2>
+  <details><summary data-k="f1q">Como funciona o envio?</summary><p data-k="f1a">Resposta.</p></details>
+  <details><summary data-k="f2q">Quais as formas de pagamento?</summary><p data-k="f2a">Resposta.</p></details>
+  <details><summary data-k="f3q">Posso trocar uma peça?</summary><p data-k="f3a">Resposta.</p></details>
+  <details><summary data-k="f4q">Como escolho meu tamanho?</summary>
+    <table><tr><th>Tam.</th><th>Busto</th><th>Cintura</th><th>Quadril</th></tr>
+    <tr><td>P</td><td>84-88</td><td>64-68</td><td>90-94</td></tr>
+    <tr><td>M</td><td>89-93</td><td>69-73</td><td>95-99</td></tr>
+    <tr><td>G</td><td>94-98</td><td>74-78</td><td>100-104</td></tr></table>
+    <p data-k="f4n">Medidas em centímetros.</p></details>
+</section>
+
+<footer class="rodape">
+  <div class="rgrid">
+    <div><img class="logo-r" src="assets/logo.svg" alt="Closet Ana Lu"></div>
+    <div><h4>Atendimento</h4><a id="linkWa1" target="_blank" rel="noopener" data-k="waTxt">Atendimento pelo WhatsApp</a><a id="linkIg" target="_blank" rel="noopener">Instagram</a></div>
+    <div><h4>Políticas</h4><button data-leg="priv">Privacidade (LGPD)</button><button data-leg="troca">Trocas e devoluções</button><button data-leg="envio">Envio e entrega</button><button data-leg="pag">Pagamento</button><button data-leg="termos">Termos de uso</button></div>
+    <div><h4>Institucional</h4><a href="#como-comprar">Como comprar</a><a href="#duvidas">Dúvidas</a><a href="#produtos">Todas as peças</a></div>
+  </div>
+  <p class="c" data-k="copy">© 2026 Closet Ana Lu. Todos os direitos reservados.</p>
+</footer>
+
+<!-- Peça -->
+<dialog id="dlgPeca"><div class="dlgtop"><button id="fecharPeca">Fechar ×</button></div><div class="dlg"><div id="pecaCorpo"></div></div></dialog>
+<!-- Zoom -->
+<dialog id="dlgZoom"><div class="zoom" style="position:relative;height:100%"><button class="zx" id="zoomX" aria-label="Fechar">×</button><button class="zn zp" id="zoomP" aria-label="Foto anterior">‹</button><img id="zoomImg" alt=""><button class="zn zq" id="zoomN" aria-label="Próxima foto">›</button></div></dialog>
+<!-- Look -->
+<dialog id="dlgLook"><div class="dlgtop"><button id="fecharLook">Fechar ×</button></div><div class="dlg" style="padding:0 20px 32px;max-width:640px;margin:0 auto"><div id="lookCorpo"></div></div></dialog>
+<!-- Políticas -->
+<dialog id="dlgLeg"><div class="dlgtop"><button id="fecharLeg">Fechar ×</button></div><div class="dlg"><div class="legtop" id="legTop"></div><div class="legc" id="legCorpo"></div></div></dialog>
+<!-- Confirmação -->
+<dialog id="dlgOk"><div class="estreito" style="max-width:520px"><h2>Pedido recebido</h2><p id="okTxt"></p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px"><a class="btn" id="okWa" target="_blank" rel="noopener">Falar com a Ana Lu</a><button class="btn ghost" id="okFechar">Continuar</button></div></div></dialog>
+
+<!-- Sacola -->
+<aside class="drawer" id="drawer" aria-label="Sacola">
+  <button class="link" id="fecharSacola" style="align-self:flex-end" aria-label="Fechar sacola">Fechar ×</button>
+  <h2>Sua sacola</h2>
+  <div id="itens"></div>
+  <div class="total"><span>Subtotal</span><span id="subtotal">R$ 0,00</span></div>
+  <div class="total" id="linhaDesc" hidden><span id="descTxt">Desconto</span><span id="descVal"></span></div>
+  <div class="cupom"><input id="cupomIn" class="campo" placeholder="Cupom de desconto" autocomplete="off" aria-label="Cupom de desconto"><button class="link" id="cupomOk">Aplicar</button></div>
+  <div class="hint" id="cupomH"></div>
+  <select id="uf" class="campo" aria-label="Estado para entrega"><option value="">Estado para entrega</option></select>
+  <div class="meta" id="freteTxt" style="margin-bottom:10px"></div>
+  <input id="nome" class="campo" placeholder="Seu nome" autocomplete="name">
+  <input id="tel" class="campo" placeholder="Seu WhatsApp com DDD" inputmode="tel" autocomplete="tel">
+  <select id="pag" class="campo" aria-label="Forma de pagamento"><option>Pix</option><option>Cartão</option></select>
+  <label class="lgl"><input type="checkbox" id="aceite"><span>Li e concordo com a <button class="link" data-leg="priv" style="border:0;padding:0;color:var(--ink)">Política de Privacidade</button>. Usamos seu nome e WhatsApp apenas para atender o seu pedido.</span></label>
+  <div class="hint" id="sacolaH"></div>
+  <button class="btn" id="finalizar" disabled>Finalizar pedido</button>
+</aside>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="assets/shop.js"></script>
+</body>
+</html>

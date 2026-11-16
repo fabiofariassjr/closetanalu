@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Painel | Closet Ana Lu</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0 14px;border-bottom:1px solid var(--line)}
+.top .logo{width:130px}
+.tabs{display:flex;gap:4px;overflow-x:auto;margin:14px 0;border-bottom:1px solid var(--line)}
+.tabs button{white-space:nowrap;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:10px 12px;cursor:pointer;font-size:14px}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--gold)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin-bottom:12px}
+.card h3{font-size:21px;margin-bottom:4px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--alt);border-radius:4px;padding:12px 14px}
+.stat b{display:block;font:500 25px 'Cormorant Garamond',serif}
+.stat span{color:var(--muted);font-size:13px}
+.linha{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:15px}
+.linha.t{font-weight:500}
+.acoes{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.pill{display:inline-block;font-size:12px;border:1px solid currentColor;padding:1px 10px;border-radius:2px;white-space:nowrap}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--rose)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row2 .full{grid-column:1/-1}
+label.c{display:block;font-size:13px;color:var(--muted);margin-top:8px}
+.campo{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:2px;padding:9px 11px;margin-top:4px;display:block}
+textarea.campo{min-height:80px}
+dialog.ad{width:min(640px,94vw);max-height:92dvh;overflow:auto;padding:22px}
+dialog.ad h2{font-size:30px;margin-bottom:10px}
+.login{max-width:380px;margin:12vh auto;text-align:center}
+.thumb{width:52px;height:66px;object-fit:cover;border-radius:2px;float:left;margin-right:12px;background:var(--alt)}
+.grupo h4{font-size:19px;margin:6px 0}
+.preview{background:var(--alt);padding:10px;border-radius:4px;word-break:break-all;font-size:12px;margin-top:8px}
+.qr{width:170px;margin:8px auto}
+</style>
+</head>
+<body>
+<div id="login" class="login" hidden>
+  <img src="assets/logo.svg" alt="Closet Ana Lu" style="width:200px;margin:0 auto 18px">
+  <h2>Painel da loja</h2>
+  <p class="meta">Digite seu e-mail. Enviamos um link de acesso, sem precisar de senha.</p>
+  <input id="loginEmail" class="campo" type="email" placeholder="seu e-mail" autocomplete="email">
+  <div style="margin-top:12px"><button class="btn" id="btnLink" style="width:100%">Enviar link de acesso</button></div>
+  <p class="meta" id="loginMsg" style="margin-top:14px"></p>
+</div>
+
+<div id="semAcesso" class="login" hidden>
+  <h2>Sem acesso</h2>
+  <p class="meta">Este e-mail não tem permissão para administrar a loja. Fale com quem cuida do site.</p>
+  <button class="btn ghost" id="btnSair">Sair</button>
+</div>
+
+<div id="app" class="wrap" hidden>
+  <div class="top">
+    <img class="logo" src="assets/logo.svg" alt="Closet Ana Lu">
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="link" href="index.html" target="_blank" rel="noopener">Ver loja</a>
+      <button class="link" id="btnSair2">Sair</button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+  <main id="view"></main>
+</div>
+
+<dialog class="ad" id="dlgProd"><form method="dialog" id="formProd" onsubmit="return false">
+  <h2 id="tProd">Nova peça</h2>
+  <div class="row2">
+    <label class="c full">Nome<input class="campo" id="pNome"></label>
+    <label class="c">Categoria<input class="campo" id="pCat" list="listaCats" placeholder="Vestidos"></label>
+    <datalist id="listaCats"></datalist>
+    <label class="c">Cor<input class="campo" id="pCor"></label>
+    <label class="c">Tamanhos (separe por vírgula)<input class="campo" id="pTam" placeholder="P, M, G"></label>
+    <label class="c">Quantidade em estoque<input class="campo" id="pQtd" type="number" min="0" value="1"></label>
+    <label class="c">Avisar quando restar até<input class="campo" id="pMin" type="number" min="0" value="1"></label>
+    <label class="c">Custo (R$) <span class="meta">só você vê</span><input class="campo" id="pCusto" type="number" min="0" step="0.01"></label>
+    <label class="c">Preço de venda (R$)<input class="campo" id="pPreco" type="number" min="0" step="0.01"></label>
+    <label class="c">Preço antigo (opcional)<input class="campo" id="pDe" type="number" min="0" step="0.01"></label>
+    <label class="c full">Coleções (separe por vírgula)<input class="campo" id="pCol" placeholder="Verão, Festa"></label>
+    <label class="c full">Descrição<textarea class="campo" id="pDesc"></textarea></label>
+    <label class="c full">Composição<input class="campo" id="pComp" placeholder="95% viscose, 5% elastano"></label>
+    <label class="c full">Medidas desta peça<textarea class="campo" id="pMed"></textarea></label>
+    <label class="c full">Foto principal<input class="campo" id="pFoto" type="file" accept="image/*"></label>
+    <label class="c full">Fotos extras (até 4)<input class="campo" id="pFotos" type="file" accept="image/*" multiple></label>
+    <label class="c full"><input type="checkbox" id="pNovo" style="width:auto"> Marcar como novidade</label>
+    <label class="c full"><input type="checkbox" id="pSite" style="width:auto" checked> Mostrar no site</label>
+  </div>
+  <div class="acoes"><button class="btn" id="pSalvar">Salvar peça</button><button class="btn ghost" id="pCancel">Cancelar</button><span class="meta" id="pMsg"></span></div>
+</form></dialog>
+
+<dialog class="ad" id="dlgDesp"><form method="dialog" onsubmit="return false">
+  <h2>Nova despesa</h2>
+  <div class="row2">
+    <label class="c full">Descrição<input class="campo" id="dDesc"></label>
+    <label class="c full">Categoria<select class="campo" id="dCat"><option>Compra de estoque</option><option>Frete</option><option>Embalagem</option><option>Marketing</option><option>Taxas e tarifas</option><option>Outros</option></select></label>
+    <label class="c">Valor (R$)<input class="campo" id="dValor" type="number" min="0" step="0.01"></label>
+    <label class="c">Data<input class="campo" id="dData" type="date"></label>
+  </div>
+  <div class="acoes"><button class="btn" id="dSalvar">Salvar despesa</button><button class="btn ghost" id="dCancel">Cancelar</button></div>
+</form></dialog>
+
+<dialog class="ad" id="dlgLook"><form method="dialog" onsubmit="return false">
+  <h2>Look</h2>
+  <label class="c">Nome do look<input class="campo" id="lNome" placeholder="Jantar de sábado"></label>
+  <div class="meta" style="margin-top:8px">Marque as peças que combinam (mínimo 2).</div>
+  <div id="lLista" style="margin-top:6px"></div>
+  <div class="acoes"><button class="btn" id="lSalvar">Salvar look</button><button class="btn ghost" id="lCancel">Cancelar</button></div>
+</form></dialog>
+
+<dialog class="ad" id="dlgCupom"><form method="dialog" onsubmit="return false">
+  <h2>Cupom</h2>
+  <div class="row2">
+    <label class="c">Código (sem espaços)<input class="campo" id="cCod" placeholder="PRIMEIRA10"></label>
+    <label class="c">Tipo<select class="campo" id="cTipo"><option value="%">Percentual (%)</option><option value="R$">Valor fixo (R$)</option></select></label>
+    <label class="c">Valor<input class="campo" id="cValor" type="number" min="0" step="0.01"></label>
+    <label class="c">Pedido mínimo (R$)<input class="campo" id="cMin" type="number" min="0" step="0.01" value="0"></label>
+    <label class="c">Válido até (opcional)<input class="campo" id="cVal" type="date"></label>
+    <label class="c"><input type="checkbox" id="cAtivo" style="width:auto" checked> Ativo</label>
+  </div>
+  <div class="acoes"><button class="btn" id="cSalvar">Salvar cupom</button><button class="btn ghost" id="cCancel">Cancelar</button></div>
+</form></dialog>
+
+<dialog class="ad" id="dlgCobrar"><form method="dialog" onsubmit="return false">
+  <h2>Cobrar pedido</h2>
+  <div class="meta" id="cobRes"></div>
+  <div class="row2" style="margin-top:8px">
+    <label class="c">Frete cobrado (R$)<input class="campo" id="cFrete" type="number" min="0" step="0.01" value="0"></label>
+    <label class="c">Total a pagar<input class="campo" id="cTotal" readonly></label>
+    <label class="c full">Link de pagamento no cartão (opcional)<input class="campo" id="cLink" placeholder="Cole o link gerado no seu app"></label>
+  </div>
+  <div id="cPix"></div>
+  <label class="c">Mensagem para a cliente<textarea class="campo" id="cMsg" readonly style="min-height:150px"></textarea></label>
+  <div class="acoes"><a class="btn" id="cEnviar" target="_blank" rel="noopener">Enviar no WhatsApp</a><button class="btn ghost" id="cCopiar">Copiar mensagem</button><button class="btn ghost" id="cFechar">Fechar</button></div>
+</form></dialog>
+
+<dialog class="ad" id="dlgLink"><form method="dialog" onsubmit="return false">
+  <h2>Link para divulgar</h2>
+  <p class="meta" id="lkT"></p>
+  <textarea class="campo" id="lkU" readonly style="min-height:70px"></textarea>
+  <div class="acoes"><button class="btn" id="lkCopy">Copiar link</button><button class="btn ghost" id="lkX">Fechar</button></div>
+</form></dialog>
+
+<dialog class="ad" id="dlgMsg"><form method="dialog" onsubmit="return false">
+  <h2 id="mT">Aviso</h2>
+  <p id="mM"></p>
+  <div class="acoes"><button class="btn" id="mOk">Confirmar</button><button class="btn ghost" id="mNao">Cancelar</button></div>
+</form></dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script type="module" src="assets/admin.js"></script>
+</body>
+</html>
